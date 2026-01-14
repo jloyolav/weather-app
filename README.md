@@ -90,11 +90,11 @@ src/
 
 ## Additional considerations and technical decitions
 
-- The search form only uses the city name, without considering the country. The search will return the first city found in the csv matching the search term. Also, the search is normalized, so it is case insensitive.
+- The **search form only uses the city name**, without considering the country. The search will return the first city found in the csv matching the search term. Also, the **search is normalized**, so it is case insensitive.
 
-- The forecast times were transformed from UTC to the local time of the requested city.
+- The forecast times were **transformed from UTC** to the local time of the requested city.
 
-- To show the hourly forecast, only forecasts with a utc time in the future and within 24 hours (from the time of the request) are shown. This is to avoid showing forecast that are too in the future and showing past periods. Also, showing only events on the same day could lead to showing no items if consulted too close to midnight.
+- For the hourly forecast view, **only forecasts with a utc time in the future and within 24 hours** (from the time of the request) are shown. This is to avoid showing forecast that are too in the future and showing past periods. Also, showing only events on the same day could lead to showing no items if consulted too close to midnight.
 
 ### Limitations of the API
 
@@ -103,9 +103,9 @@ The only available APIs for the provided API key were:
 - Current weather data: https://openweathermap.org/current
 - 5 day / 3 hour forecast: https://openweathermap.org/forecast5
 
-The first one was not used, since it was not required for the assigned tasks. However, the second API, which was used for this assignment, had some format limitations that required additional definitions and processing in order to achieve the requirements.
+The first one was not used, since it was not required for the assigned tasks. However, the second API, which was used for this assignment, had some **format limitations that required additional definitions and processing in order to achieve the requirements of the project**.
 
-The 5 day / 3 hour forecast API DOES NOT PROVIDE hourly forecast data. It neither provides daily summarized data. The API response is as follows:
+The 5 day / 3 hour forecast API _**DOES NOT PROVIDE**_ hourly forecast data. It neither provides daily summarized data. The API response is as follows:
 
 ```JSON
 {
@@ -174,13 +174,13 @@ The 5 day / 3 hour forecast API DOES NOT PROVIDE hourly forecast data. It neithe
 
 This format has a few consequences:
 
-- We only have the weather forecast every 3 hours, not hourly, so the UI shows that instead of the hourly version shown in the sample mockup provided.
+- We only have the weather forecast **every 3 hours, not hourly**, so the UI shows that instead of the hourly version shown in the sample mockup provided.
 
-- We don't have a max temperature, min temperature, and weather forecast for the day in general (with the icon and the description 'Clear throughout the day'), as shown in the mockup. We only have min, max and weather object (with the icon and short description) for each of those time spans of 3 hours within the day. In order to achieve the required view, more processing of the data was needed.
+- **We don't have a max temperature, min temperature, and weather forecast for the day** in general (with the icon and the description 'Clear throughout the day'), as shown in the mockup. We only have min, max and weather object (with the icon and short description) for each of those time spans of 3 hours within the day. In order to achieve the required view shown in the mockup, more processing of the data was needed.
 
-  - The icon and description for the daily forecast weather was selected from the forecast provided for the time span closest to noon (12 pm), as a middle point of the day.
+  - The **icon and description** for the daily forecast weather was selected from the forecast provided for the **time span closest to noon (12 pm)**, as a middle point of the day.
 
-  - The min and max temperature was selected filtering all of the forecast items of the needed day, and searching for the minimum and maximum temperature forecasted throughout those day's records. For example, the min temp could be associated to the forecast for 3 am local hour, and the max temp could be from the forecast for 3 pm local hour.
+  - The **min and max temperature** was selected filtering all of the forecast items of the needed day, and searching for the **minimum and maximum temperature forecasted throughout those day's records**. For example, the min temp could be associated to the forecast for 3AM local hour, and the max temp could be from the forecast for 3PM local hour.
 
 ```
 
